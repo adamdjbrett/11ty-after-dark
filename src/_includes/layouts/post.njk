@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+showAfterDarkTitle: false
+---
+<article itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    <h1 itemprop="headline">{{ title }}</h1>
+    <span class="muted">
+      <svg class="icon i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"></circle>
+        <path d="M16 8 L16 16 20 20"></path>
+      </svg>
+      <span>{{ content | readingTime }} minute read</span>
+      <svg class="icon i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"></path>
+      </svg>
+      {% if date %}Published: {{ date | ymdDate }}{% endif %}
+    </span>
+  </header>
+
+  <div itemprop="articleBody">
+    {{ content | safe }}
+  </div>
+
+  <footer>
+    <hr>
+    <p>
+      {% if author %}
+      Published by {{ author }}
+      {% elif site.author %}
+      Published by {{ site.author }}
+      {% endif %}
+
+      {% if categories and categories.length %}
+      in <a href="/categories/{{ categories[0] | slugify }}/">{{ categories[0] }}</a>
+      {% endif %}
+
+      {% if tags and tags.length %}
+      {% if categories and categories.length %}and{% endif %}
+      tagged
+      {% for tag in tags %}
+      <a href="/tags/{{ tag | slugify }}/">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+      {% endif %}
+    </p>
+  </footer>
+</article>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Eleventy 3.1.2">
+
+  {% set metaDescription = description or site.description %}
+  {% if metaDescription %}
+  <meta name="description" content="{{ metaDescription }}">
+  {% endif %}
+
+  {% set docTitle = pageTitle or title or site.title %}
+  <title>{{ docTitle }}</title>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }} Atom Feed" href="/feed/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS Feed" href="/feed/feed.rss">
+  <link rel="alternate" type="text/plain" title="{{ site.title }} Plain Sitemap" href="/sitemap.txt">
+  <link rel="stylesheet" href="/site.css">
+
+  {% if extraHead %}
+  {{ extraHead | safe }}
+  {% endif %}
+</head>
+<body class="hack dark main container">
+  {% if site.afterDarkMenu %}
+  <header class="nav-header">
+    <p class="muted">Site generator: 11ty</p>
+    <nav itemscope itemtype="http://schema.org/SiteNavigationElement" class="navbar">
+      <div class="nav-links">
+        {% for item in site.afterDarkMenu %}
+        <a itemprop="url" class="{% if page.url == item.url %}active{% endif %}" href="{{ item.url }}">
+          <span itemprop="name">{{ item.name }}</span>
+        </a>&nbsp;&vert;
+        {% endfor %}
+      </div>
+    </nav>
+
+    {% if site.enableSearch %}
+    <div class="search-container">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="search-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>
+      <input type="text" id="search" placeholder="Search...">
+      <div class="search-results">
+        <div class="search-results__items"></div>
+      </div>
+    </div>
+    {% endif %}
+  </header>
+  {% endif %}
+
+  <main>
+    {% if showAfterDarkTitle != false and site.afterDarkTitle %}
+    <header>
+      <h1>{{ site.afterDarkTitle }}</h1>
+    </header>
+    {% endif %}
+    {{ content | safe }}
+  </main>
+
+  {% if site.codeblock %}
+  <script src="/js/codeblock.js"></script>
+  {% endif %}
+
+  {% if site.latex %}
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  {% endif %}
+
+  {% if site.enableSearch %}
+  <script src="/elasticlunr.min.js"></script>
+  <script src="/js/search.js"></script>
+  {% endif %}
+
+  <footer>
+    <small class="muted">Built with 11ty.</small>
+  </footer>
+</body>
+</html>

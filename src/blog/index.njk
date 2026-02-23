@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+showAfterDarkTitle: false
+pageTitle: Blog | after-dark theme
+pagination:
+  data: collections.posts
+  size: 5
+  alias: postList
+permalink: "/blog/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+---
+{% import "partials/post-macros.njk" as post_macros %}
+<header>
+  <h1>Blog</h1>
+</header>
+
+{% for post in postList %}
+{{ post_macros.pageInList(post) }}
+{% endfor %}
+
+<nav>
+  <p>
+    {% if pagination.href.previous %}
+    <a href="{{ pagination.href.previous }}">&laquo; Previous</a> |
+    {% endif %}
+    <span>Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+    {% if pagination.href.next %}
+    | <a href="{{ pagination.href.next }}">Next &raquo;</a>
+    {% endif %}
+  </p>
+</nav>

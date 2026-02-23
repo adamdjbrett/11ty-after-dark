@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+showAfterDarkTitle: false
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag | slugify }}/index.html"
+---
+{% import "partials/post-macros.njk" as post_macros %}
+<header>
+  <h1>Tag: {{ tag }}</h1>
+</header>
+
+{% for post in collections.posts %}
+  {% if post.data.tags and (tag in post.data.tags) %}
+  {{ post_macros.pageInList(post) }}
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.posts
+  size: 5
+  alias: postList
+permalink: "{% if pagination.pageNumber == 0 %}/index.html{% else %}/page/{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+---
+{% import "partials/post-macros.njk" as post_macros %}
+{% for post in postList %}
+{{ post_macros.pageInList(post) }}
+{% endfor %}
+
+<nav>
+  <p>
+    {% if pagination.href.previous %}
+    <a href="{{ pagination.href.previous }}">&laquo; Previous</a> |
+    {% endif %}
+    <span>Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+    {% if pagination.href.next %}
+    | <a href="{{ pagination.href.next }}">Next &raquo;</a>
+    {% endif %}
+  </p>
+</nav>

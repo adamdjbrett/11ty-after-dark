@@ -1,0 +1,29 @@
+{% macro meta(post) %}
+  <svg class="icon i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <circle cx="16" cy="16" r="14"></circle>
+    <path d="M16 8 L16 16 20 20"></path>
+  </svg>
+  <span>{{ (post.templateContent or post.content or "") | readingTime }} minute read</span>
+  <svg class="icon i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"></path>
+  </svg>
+  {% if post.date %}Published: {{ post.date | ymdDate }}{% endif %}
+{% endmacro %}
+
+{% macro pageInList(post) %}
+  <article itemscope itemtype="http://schema.org/CreativeWork">
+    <header>
+      <h2 itemprop="name">
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+      </h2>
+      <span class="muted">{{ meta(post) }}</span>
+    </header>
+    {% set summary = post.data.excerpt or post.data.summary or post.data.description %}
+    {% if summary %}
+    <div itemprop="summary">
+      {{ summary | safe }}
+      <nav class="readmore"><a itemprop="url" href="{{ post.url }}">Read More&nbsp;&raquo;</a></nav>
+    </div>
+    {% endif %}
+  </article>
+{% endmacro %}

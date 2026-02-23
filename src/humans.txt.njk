@@ -1,0 +1,50 @@
+---
+permalink: /humans.txt
+eleventyExcludeFromCollections: true
+---
+/* TEAM */
+Site: {{ site.title }}
+URL: {{ site.url }}
+Description: {{ site.description }}
+Author: {{ site.author }}
+
+/* THEME CREDIT */
+Original Theme: after-dark
+Original Theme Homepage: https://github.com/getzola/after-dark
+Original Theme Author: getzola contributors
+Original Theme License: MIT
+
+/* AUTHORS */
+- {{ site.author }}
+
+/* CO-AUTHORS */
+- (none detected)
+
+/* CONTRIBUTORS (Git) */
+- Vincent Prouillet <balthek@gmail.com>
+- Vincent Prouillet <vincent@wearewizards.io>
+- Jake G <106644+Jieiku@users.noreply.github.com>
+- Basix <basix@basix.tech>
+- Jacob Hinchliffe <jacobhin1@gmail.com>
+- Vincent Prouillet <github@vincentprouillet.com>
+- Vincent Prouillet <prouillet.vincent@gmail.com>
+- Andrew Banchich <andrewbanchich@gmail.com>
+- Boris-Chengbiao Zhou <bobo1239@web.de>
+- GitHub Actions <github-actions-bot@users.noreply.github.com>
+- Micah Kepe <micahkepe@gmail.com>
+- Nick Novitski <github@nicknovitski.com>
+- Toni Snark <48404037+tonisnark@users.noreply.github.com>
+- Trevor Elliott <awesomelyawesome@gmail.com>
+- Tshepang Lekhonkhobe <tshepang@gmail.com>
+- Victor Toso <me@victortoso.com>
+- apiraino <apiraino@users.noreply.github.com>
+
+/* TECHNOLOGY */
+Built with: Eleventy 3.1.2, ESM, Nunjucks, Luxon
+Generated: {{ 'now' | isoDate }}
+
+/* FEEDS */
+- {{ '/feed/feed.xml' | absoluteUrl(site.url) }}
+- {{ '/feed/feed.rss' | absoluteUrl(site.url) }}
+- {{ '/sitemap.xml' | absoluteUrl(site.url) }}
+- {{ '/sitemap.txt' | absoluteUrl(site.url) }}

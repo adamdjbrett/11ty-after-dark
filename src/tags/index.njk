@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+showAfterDarkTitle: false
+pageTitle: Tags | after-dark theme
+permalink: /tags/
+---
+<header>
+  <h1>Tags</h1>
+</header>
+<ul>
+  {% for tag in collections.tagList %}
+  <li><a href="/tags/{{ tag | slugify }}/">{{ tag }}</a></li>
+  {% endfor %}
+</ul>
